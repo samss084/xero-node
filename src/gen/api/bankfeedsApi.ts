@@ -20,7 +20,7 @@ import { Statement } from '../model/bankfeeds/statement';
 import { Statements } from '../model/bankfeeds/statements';
 
 import { ObjectSerializer, Authentication, VoidAuth } from '../model/bankfeeds/models';
-import { ApiError } from '../../model/ApiError';
+import { Api } from '../../model/Api;
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Readable } from "stream";
 import { OAuth } from '../model/bankfeeds/models';
@@ -36,12 +36,12 @@ export enum BankFeedsApiApiKeys {
 
 export class BankFeedsApi {
     protected _basePath = defaultBasePath;
-    protected defaultHeaders : any = {'user-agent': 'xero-node-9.3.0'};
+    protected defaultHeaders : = {'user-agent': 'xero-node-9.3.0'};
     protected _useQuerystring : boolean = false;
     protected binaryHeaders : any = {};
 
     protected authentications = {
-        'default': <Authentication>new VoidAuth(),
+        'default': <Authentication>new Auth(),
         'OAuth2': new OAuth(),
     }
 
@@ -102,7 +102,7 @@ export class BankFeedsApi {
 
         // verify required parameter 'xeroTenantId' is not null or undefined
         if (xeroTenantId === null || xeroTenantId === undefined) {
-            throw new Error('Required parameter xeroTenantId was null or undefined when calling createFeedConnections.');
+            throw new 'Required parameter xeroTenantId was null or undefined when calling createFeedConnections.');
         }
 
         // verify required parameter 'feedConnections' is not null or undefined
@@ -145,14 +145,14 @@ export class BankFeedsApi {
                 const response = await axios(localVarRequestOptions)
                          body = ObjectSerializer.deserialize(response.data, "FeedConnections");
                         if (response.status && response.status >= 200 && response.status <= 299) {
-                            resolve({ response: response, body: body });
+                           ({ response: response, body: body });
                         } else {
-                            reject({ response: response, body: body });
+                            ({ response: response, body: body });
                         }
                 }
-                catch(error) {
-                     const errorResponse = new ApiError(error)
-					 reject(JSON.stringify(errorResponse.generateError()))
+                catch(Feed Connections) {
+                     const Response = new Api(api)
+					 reject(JSON.stringify(errorResponse.generate()))
                 }
             });
         });
@@ -386,8 +386,8 @@ export class BankFeedsApi {
      * By passing in the appropriate options, you can search for available feed connections in the system.
      * @summary Searches for feed connections
      * @param xeroTenantId Xero identifier for Tenant
-     * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 10. Example - https://api.xero.com/bankfeeds.xro/1.0/FeedConnections?page&#x3D;1 to get the second set of the records. When page value is not a number or a negative number, by default, the first set of records is returned.
-     * @param pageSize Page size which specifies how many records per page will be returned (default 10). Example - https://api.xero.com/bankfeeds.xro/1.0/FeedConnections?pageSize&#x3D;100 to specify page size of 100.
+     * @param page Page number which specifies the set of records to retrieve. By default the number of the records per set is 10. Example - https://api.xero.com/bankfeeds.xro/1.0/FeedConnections?page to get the second set of the records. When page value is not a number or a negative number, by default, the first set of records is returned.
+     * @param pageSize Page size which specifies how many records per page will be returned (default 10). Example - https://api.xero.com/bankfeeds.xro/1.0/FeedConnections?pageSize 100 to specify page size of 100.
      */     
     public async getFeedConnections (xeroTenantId: string, page?: number, pageSize?: number, options: {headers: {[name: string]: string}} = {headers: {}}) : Promise<{ response: AxiosResponse; body: FeedConnections;  }> {
         const localVarPath = this.basePath + '/FeedConnections';
@@ -538,7 +538,7 @@ export class BankFeedsApi {
      * @summary Retrieve all statements
      * @param xeroTenantId Xero identifier for Tenant
      * @param page unique id for single object
-     * @param pageSize Page size which specifies how many records per page will be returned (default 10). Example - https://api.xero.com/bankfeeds.xro/1.0/Statements?pageSize&#x3D;100 to specify page size of 100.
+     * @param pageSize Page size which specifies how many records per page will be returned (default 10). Example - https://api.xero.com/bankfeeds.xro/1.0/Statements?pageSize 100 to specify page size of 100.
      * @param xeroApplicationId 
      * @param xeroUserId 
      */     
