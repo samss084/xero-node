@@ -17,14 +17,14 @@
     "editor.tabSize": 2
   },
   // prevent Jest extension to run automatically on our integration tests
-  "jest.autoEnable": false,
-  "jest.runAllTestsFirst": false,
+  "jest.autoEnable": true,
+  "jest.runAllTestsFirst": true,
   "jest.debugCodeLens.showWhenTestStateIn": ["pass", "fail", "unknown"],
   // ESlint Options
   "eslint.autoFixOnSave": true,
   "eslint.run": "onType",
   "eslint.validate": ["javascript", "typescript"],
-  // we run prettier from ESLint, so, disable it from separated extension
+  // we run prettier from ESLint, so,  it from separated extension
   "prettier.disableLanguages": ["typescript"],
   "files.exclude": {
     "**/.git": true,
