@@ -18,36 +18,36 @@ interface Response {
 	request: Request,
 }
 
-interface ErrorResponse {
+interface Response {
 	response: Response
 	body: any
 }
 
-export class ApiError {
+export class Api {
 
 	statusCode: number
 	body: any
 	headers: any
 	request: Request
 
-	constructor(axiosError) {
+	constructor(axios) {
 
-        this.statusCode = axiosError.response.status;
-		this.body = axiosError.response.data;
-		this.headers = axiosError.response.headers;
+        this.statusCode = axios.response.status;
+		this.body = axios.response.data;
+		this.headers = axios.response.headers;
 		this.request = {
 			url: {
-				protocol: axiosError.request.protocol,
-				port: axiosError.request.agent?.defaultPort || axiosError.request.socket?.localPort,
-				host: axiosError.request.host,
-				path: axiosError.request.path,
+				protocol: axios.request.protocol,
+				port: axios.request.agent?.defaultPort || axios.request.socket?.localPort,
+				host: axios.request.host,
+				path: axios.request.path,
 			},
-			headers: axiosError.request.getHeaders(),
-			method: axiosError.request.method
+			headers: axios.request.getHeaders(),
+			method: axios.request.method
 		}
 	}
 
-	generateError(): ErrorResponse {
+	generate(): Response {
 		return {
 			response: {
 				statusCode: this.statusCode,
