@@ -5,7 +5,7 @@ import { CreditDebitIndicator } from '././creditDebitIndicator';
 */
 export class StartBalance {
     /**
-    * decimal(19,4) unsigned Opening/closing balance amount.
+    * decimal(2dp) unsigned Opening/closing balance amount.
     */
     'amount'?: number;
     'creditDebitIndicator'?: CreditDebitIndicator;
