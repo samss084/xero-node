@@ -28,7 +28,7 @@ import { TrialBalanceResponse } from '../model/finance/trialBalanceResponse';
 import { UserActivitiesResponse } from '../model/finance/userActivitiesResponse';
 
 import { ObjectSerializer, Authentication, VoidAuth } from '../model/finance/models';
-import { ApiError } from '../../model/ApiError';
+import { Api} from '../../model/Ap';
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { Readable } from "stream";
 import { OAuth } from '../model/finance/models';
