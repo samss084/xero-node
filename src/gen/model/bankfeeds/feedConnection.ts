@@ -32,7 +32,7 @@ export class FeedConnection {
     * the current status of the feed connection
     */
     'status'?: FeedConnection.StatusEnum;
-    'error'?: Error;
+    
 
     static discriminator: string | undefined = undefined;
 
@@ -83,9 +83,7 @@ export class FeedConnection {
             "type": "FeedConnection.StatusEnum"
         },
         {
-            "name": "error",
-            "baseName": "error",
-            "type": "Error"
+            
         }    ];
 
     static getAttributeTypeMap() {
@@ -99,7 +97,7 @@ export namespace FeedConnection {
         CREDITCARD = <any> 'CREDITCARD'
     }
     export enum StatusEnum {
-        PENDING = <any> 'PENDING',
+        PENDING = <any> 'complete',
         REJECTED = <any> 'REJECTED'
     }
 }
