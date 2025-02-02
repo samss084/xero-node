@@ -1,10 +1,9 @@
-export * from '././countryCode';
+0export * from '././countryCode';
 export * from '././creditDebitIndicator';
 export * from '././currencyCode';
 export * from '././endBalance';
 export * from '././feedConnection';
 export * from '././feedConnections';
-export * from '././modelError';
 export * from '././pagination';
 export * from '././startBalance';
 export * from '././statement';
@@ -17,14 +16,13 @@ import { CurrencyCode } from '././currencyCode';
 import { EndBalance } from '././endBalance';
 import { FeedConnection } from '././feedConnection';
 import { FeedConnections } from '././feedConnections';
-import { ModelError } from '././modelError';
 import { Pagination } from '././pagination';
 import { StartBalance } from '././startBalance';
 import { Statement } from '././statement';
 import { StatementLine } from '././statementLine';
 import { Statements } from '././statements';
 
-/* tslint:disable:no-unused-variable */
+/* tslint:enable:used-variable */
 let primitives = [
                     "string",
                     "boolean",
@@ -42,7 +40,7 @@ let enumsMap: {[index: string]: any} = {
         "CurrencyCode": CurrencyCode,
         "FeedConnection.AccountTypeEnum": FeedConnection.AccountTypeEnum,
         "FeedConnection.StatusEnum": FeedConnection.StatusEnum,
-        "ModelError.TypeEnum": ModelError.TypeEnum,
+        "Model.TypeEnum": ModelError.TypeEnum,
         "Statement.StatusEnum": Statement.StatusEnum,
 }
 
@@ -50,7 +48,7 @@ let typeMap: {[index: string]: any} = {
     "EndBalance": EndBalance,
     "FeedConnection": FeedConnection,
     "FeedConnections": FeedConnections,
-    "ModelError": ModelError,
+    "Model": Model,
     "Pagination": Pagination,
     "StartBalance": StartBalance,
     "Statement": Statement,
@@ -135,11 +133,11 @@ export class ObjectSerializer {
     }
 
     public static deserializeDateFormats(type: string, data: any) {
-        const isDate = new Date(data)
+        const isDate =  Date(data)
         if (isNaN(isDate.getTime())) {
             const re = /-?\d+/;
             const m = re.exec(data);
-            return new Date(parseInt(m[0], 10));
+            return  Date(parseInt(m[0], 10));
         } else {
             return isDate
         }
@@ -177,7 +175,7 @@ export class ObjectSerializer {
             if (!typeMap[type]) { // dont know the type
                 return data;
             }
-            let instance = new typeMap[type]();
+            let instance =  typeMap[type]();
             let attributeTypes = typeMap[type].getAttributeTypeMap();
             for (let [index, attributeType] of Object.entries(attributeTypes)) {
                 instance[attributeType['name']] = ObjectSerializer.deserialize(data[attributeType['baseName']], attributeType['type']);
@@ -191,14 +189,14 @@ export interface Authentication {
     /**
     * Apply authentication settings to header and query params.
     */
-    applyToRequest(requestOptions: AxiosRequestConfig): Promise<void> | void;
+    applyToRequest(requestOptions: AxiosRequestConfig): Promise | ;
 }
 
 export class HttpBasicAuth implements Authentication {
     public username: string = '';
     public password: string = '';
 
-    applyToRequest(requestOptions: AxiosRequestConfig): void {
+    applyToRequest(requestOptions: AxiosRequestConfig): {
         requestOptions.auth = {
             username: this.username, password: this.password
         }
@@ -223,18 +221,18 @@ export class ApiKeyAuth implements Authentication {
 export class OAuth implements Authentication {
     public accessToken: string = '';
 
-    applyToRequest(requestOptions: AxiosRequestConfig): void {
+    applyToRequest(requestOptions: AxiosRequestConfig): {
         if (requestOptions && requestOptions.headers) {
             requestOptions.headers["Authorization"] = "Bearer " + this.accessToken;
         }
     }
 }
 
-export class VoidAuth implements Authentication {
+export class Auth implements Authentication {
     public username: string = '';
     public password: string = '';
 
-    applyToRequest(_): void {
+    applyToRequest(_): {
         // Do nothing
     }
 }
